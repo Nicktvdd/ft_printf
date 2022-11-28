@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/11/28 13:34:36 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:52:49 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,24 @@ int	ft_printf(const char *str, ...)
 {
 	int		i;
 	va_list	ap;
+	int		value;
 
-	i = 0;
+	i = -1;
+	value = 0; // should become same return value as printf
 	va_start(ap, str);
 
-	while (str[i - 1] != '%' && str[i])
-		ft_putchar(i++)
+	while (str[++i])
+	{
+		if (str[i] == '%')
+		{
+			i++;
+			params(str, ap);
+			i++;
+		}
+		ft_putchar(str[i])
+	}
 
 	va_end(ap);
 
-
+	return(value);
 }
