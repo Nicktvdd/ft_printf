@@ -6,31 +6,56 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/11/28 16:17:19 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:55:11 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+int	ft_putnbr(int n)
+{
+	int	i;
+
+	i = 0;
+	if (n < 0)
+	{
+		ft_putchar_fd ('-');
+		if (n <= -2147483648)
+		{
+			ft_putchar_fd('2');
+			n = n % -1000000000;
+		}
+			n = n * -1;
+	}
+	if (n / 10)
+	{
+		ft_putnbr(n / 10);
+	}
+	ft_putchar(n % 10 + '0');
+	return (0);
+}
+
+void	ft_putchar(char c)
+{
+	write (1, &c, 1);
+}
 // take the argument from '%'
 int	params(char *str, va_list ap) 
 {
 	if (ap == 'c')
 		ft_putchar(str);//Prints a single character.
-	if (ap == 's')
+/* 	if (ap == 's')
 		ft_putstr(str);// Prints a string (as defined by the common C convention).
 	if (ap == 'p')
-		ft_void(str);// The void * pointer argument has to be printed in hexadecimal format.
-	if (ap == 'd')
+		ft_void(str);// The void * pointer argument has to be printed in hexadecimal format. */
+	if (ap == 'd' || ap == 'i')
 		ft_putnbr(str);// Prints a decimal (base 10) number.
-	if (ap == 'i')
-		ft_putnbr(str);// Prints an integer in base 10.
 	if (ap == 'u')
 		ft_putnbr(str);// Prints an unsigned decimal (base 10) number.
-	if (ap == 'x')
+/* 	if (ap == 'x')
 		ft_lowhex(str);// Prints a number in hexadecimal (base 16) lowercase format.
 	if (ap == 'X')
-		ft_uphex(str);// Prints a number in hexadecimal (base 16) uppercase format.
+		ft_uphex(str);// Prints a number in hexadecimal (base 16) uppercase format. */
 	if (ap == '%')
 		write(1, '%', 1);// Prints a percent sign.
 	return (0);
@@ -39,9 +64,9 @@ int	params(char *str, va_list ap)
 // loop through the string until '%'
 int	ft_printf(const char *str, ...)
 {
-	int		i;
-	va_list	ap;
-	int		value;
+	int			i;
+	va_list		ap;
+	static int	value;
 
 	i = -1;
 	value = 0; // should become same return value as printf
@@ -52,10 +77,11 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%') // if % is found, check which parameter
 		{
 			i++;
-			params(str, ap);
+			value = value + params(ap, int);
 			i++;
 		}
-		ft_putchar(str[i])
+		ft_putchar(str[i]);
+		value++;
 	}
 
 	va_end(ap);
