@@ -6,13 +6,13 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 17:42:41 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/11/08 12:11:23 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:06:34 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_counter(int n)
+static int	ft_counter(long n)
 {
 	int	len;
 
@@ -26,7 +26,7 @@ static int	ft_counter(int n)
 	return (len);
 }
 
-static char	*ft_positive(int n, int len, char *str)
+static char	*ft_positive(long n, int len, char *str)
 {
 	while (--len >= 0)
 	{
@@ -36,7 +36,7 @@ static char	*ft_positive(int n, int len, char *str)
 	return (str);
 }
 
-static char	*ft_negative(int n, int len, char *str)
+static char	*ft_negative(long n, int len, char *str)
 {
 	if (n <= -2147483648)
 	{
@@ -52,7 +52,7 @@ static char	*ft_negative(int n, int len, char *str)
 	return (str);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(long n)
 {
 	int		i;
 	int		len;

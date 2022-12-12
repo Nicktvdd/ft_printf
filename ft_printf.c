@@ -6,68 +6,70 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/12 13:25:27 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:03:47 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-void	ft_putchar(char c)
+/* void	*cast(const char *str, va_list ap)
 {
-	write (1, &c, 1);
-}
-
-int	ft_putnbr(int n)
-{
-	int	i;
-
-	i = 0;
-	if (n < 0)
+	if (*str == 'c' || *str == 'd' || *str == 'i')
 	{
-		ft_putchar('-');
-		if (n <= -2147483648)
-		{
-			ft_putchar('2');
-			n = n % -1000000000;
-		}
-			n = n * -1;
+		int c;
+		c = va_arg(ap, int);
 	}
-	if (n / 10)
+	if (ap == 's')
+		ft_putstr(str);
+	if (ap == 'p')
+		ft_void(str);
+	if (*str == 'u')
 	{
-		ft_putnbr(n / 10);
+		unsigned int c;
+		c = va_arg(ap, unsigned int);
 	}
-	ft_putchar(n % 10 + '0');
-	return (0);
-}
-
-
+	if (ap == 'x')
+		ft_lowhex(str);
+	if (ap == 'X')
+		ft_uphex(str);
+} */
 
 // take the argument from '%'
 int	params(const char *str, va_list ap) 
 {
-//	if (*str == 'c' || *str == 'i' || *str == 'd') need to make helper funct for this
-		int c = va_arg(ap, int);
+	int count;
+	count = 0;
+	char *type;
+	//cast(str, ap);
+	//c = va_arg(ap, type);
 	if (*str == 'c')
-		ft_putchar(c);//Prints a single character.
+		ft_putchar_fd(va_arg(ap, int), 1);//Prints a single character.
 /* 	if (ap == 's')
 		ft_putstr(str);// Prints a string (as defined by the common C convention).
 	if (ap == 'p')
 		ft_void(str);// The void * pointer argument has to be printed in hexadecimal format. */
 	if (*str == 'd' || *str == 'i')
-		ft_putnbr(c);// Prints a decimal (base 10) number.
+	{
+		char *n = ft_itoa(va_arg(ap, int));// Prints a decimal (base 10) number.
+		ft_putstr_fd(n, 1);
+	}
 	if (*str == 'u')
-		ft_putnbr(c);// Prints an unsigned decimal (base 10) number.
+	{
+		long n = (unsigned int)va_arg(ap, unsigned int);
+		char *d = ft_itoa(n);// Prints an unsigned decimal (base 10) number.
+		ft_putstr_fd(d, 1);
+	}
 /* 	if (ap == 'x')
 		ft_lowhex(str);// Prints a number in hexadecimal (base 16) lowercase format.
 	if (ap == 'X')
 		ft_uphex(str);// Prints a number in hexadecimal (base 16) uppercase format. */
 	if (*str == '%')
 		write(1, "%", 1);// Prints a percent sign.
-	return (0);
+	return (count);
 }
 
 // loop through the string until '%'
-
 int	ft_printf(const char *str, ...)
 {
 	int			i;
@@ -87,7 +89,7 @@ int	ft_printf(const char *str, ...)
 			//value = value + params(*ap, int);
 			i++;
 		}
-		ft_putchar(str[i]);
+		ft_putchar_fd(str[i], 1);
 		value++;
 	}
 
