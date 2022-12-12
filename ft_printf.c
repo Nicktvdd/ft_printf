@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/12 11:23:08 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:25:27 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,23 @@ int	ft_putnbr(int n)
 	return (0);
 }
 
+
+
 // take the argument from '%'
 int	params(const char *str, va_list ap) 
 {
+//	if (*str == 'c' || *str == 'i' || *str == 'd') need to make helper funct for this
+		int c = va_arg(ap, int);
 	if (*str == 'c')
-		ft_putchar(*str);//Prints a single character.
+		ft_putchar(c);//Prints a single character.
 /* 	if (ap == 's')
 		ft_putstr(str);// Prints a string (as defined by the common C convention).
 	if (ap == 'p')
 		ft_void(str);// The void * pointer argument has to be printed in hexadecimal format. */
 	if (*str == 'd' || *str == 'i')
-		ft_putnbr(*str);// Prints a decimal (base 10) number.
+		ft_putnbr(c);// Prints a decimal (base 10) number.
 	if (*str == 'u')
-		ft_putnbr(*str);// Prints an unsigned decimal (base 10) number.
+		ft_putnbr(c);// Prints an unsigned decimal (base 10) number.
 /* 	if (ap == 'x')
 		ft_lowhex(str);// Prints a number in hexadecimal (base 16) lowercase format.
 	if (ap == 'X')
