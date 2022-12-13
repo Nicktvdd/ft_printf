@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/13 10:19:34 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/13 10:22:55 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	params(const char *str, va_list ap)
 	}	
 	if (*str == 's')
 	{
-		ft_putstr_fd(va_arg(ap, char*), 1);// Prints a string (as defined by the common C convention).
+		char *str = va_arg(ap, char*);
+		ft_putstr_fd(str, 1);// Prints a string (as defined by the common C convention).
+		ft_strlen(str);
 	}
 	/*if (ap == 'p')
 		ft_void(str);// The void * pointer argument has to be printed in hexadecimal format. */
