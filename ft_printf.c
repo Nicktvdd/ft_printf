@@ -6,19 +6,39 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/19 13:35:00 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:52:27 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
+static int	ft_counter(long n)
+{
+	int	len;
+
+	len = 0;
+	while (n / 10)
+	{
+		n = n / 10;
+		len++;
+	}
+	len++;
+	return (len);
+}
+
 char	*ft_hex(int deci)
 {
 	int remainder;
 	int i;
+	int len;
 	char *hexa;
-	
+
+	i = 0;	
+	len = ft_counter(deci);
+	(hexa = malloc(sizeof(char) * (len + 1)));
+	if (!hexa)
+		return (NULL);
 	while (deci != 0)
 	{
 		remainder = deci % 16;
