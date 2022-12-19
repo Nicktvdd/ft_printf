@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/19 13:57:46 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:24:49 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_counter(long n)
 	return (len);
 }
 
-char	*ft_hex(int deci)
+char	*ft_hex(int deci, char flag)
 {
 	int remainder;
 	int i;
@@ -44,6 +44,8 @@ char	*ft_hex(int deci)
 		remainder = deci % 16;
 		if (remainder < 10)
 			hexa[i++] = 48 + remainder;
+		else if (flag == 'X')
+			hexa[i++] = 55 + remainder;
 		else
 			hexa[i++] = 87 + remainder;
 		deci = deci / 16;
@@ -82,19 +84,16 @@ int	params(const char *str, va_list ap)
 		ft_putstr_fd(d, 1);
 		count = ft_strlen(d);
 	}
-	if (*str == 'x')
+	if (*str == 'x' || *str == 'X')
 	{
-		char *d = ft_hex(va_arg(ap, int));// Prints a number in hexadecimal (base 16) lowercase format.
+		char *d;
+		if (*str == 'x')
+			d = ft_hex(va_arg(ap, int), *str);// Prints a number in hexadecimal (base 16) lowercase format.
+		else
+			d = ft_hex(va_arg(ap, int), *str);// Prints a number in hexadecimal (base 16) uppercase format.
 		ft_putstr_fd(d, 1);
 		count = ft_strlen(d);
 	}
-	if (*str == 'X')
-	{
-		char *d = ft_hex(va_arg(ap, int));// Prints a number in hexadecimal (base 16) uppercase format.
-		ft_putstr_fd(d, 1);
-		count = ft_strlen(d);
-	}
-
 	if (*str == '%')
 	{
 		write(1, "%", 1);// Prints a percent sign.
