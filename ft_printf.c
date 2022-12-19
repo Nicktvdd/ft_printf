@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/19 15:24:49 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:56:15 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,20 @@ static int	ft_counter(long n)
 	return (len);
 }
 
-char	*ft_hex(int deci, char flag)
+int	ft_hex(int deci, char flag)
 {
 	int remainder;
 	int i;
 	int len;
 	char *hexa;
 
-	i = 0;	
+	i = 0;
 	len = ft_counter(deci);
+	if (flag == 'p')
+		ft_putstr_fd("0x", 1);
 	(hexa = malloc(sizeof(char) * (len + 1)));
 	if (!hexa)
-		return (NULL);
+		return (0);
 	while (deci != 0)
 	{
 		remainder = deci % 16;
@@ -50,7 +52,10 @@ char	*ft_hex(int deci, char flag)
 			hexa[i++] = 87 + remainder;
 		deci = deci / 16;
 	}
-return (hexa);
+	ft_putstr_fd(hexa, 1);
+	if (flag == 'p')
+		len += 2;
+return (len);
 }
 
 // take the argument from '%'
@@ -69,8 +74,6 @@ int	params(const char *str, va_list ap)
 		ft_putstr_fd(str, 1);// Prints a string (as defined by the common C convention).
 		count = ft_strlen(str);
 	}
-	/*if (ap == 'p')
-		ft_void(str);// The void * pointer argument has to be printed in hexadecimal format. */
 	if (*str == 'd' || *str == 'i')
 	{
 		char *n = ft_itoa(va_arg(ap, int));// Prints a decimal (base 10) number.
@@ -84,16 +87,8 @@ int	params(const char *str, va_list ap)
 		ft_putstr_fd(d, 1);
 		count = ft_strlen(d);
 	}
-	if (*str == 'x' || *str == 'X')
-	{
-		char *d;
-		if (*str == 'x')
-			d = ft_hex(va_arg(ap, int), *str);// Prints a number in hexadecimal (base 16) lowercase format.
-		else
-			d = ft_hex(va_arg(ap, int), *str);// Prints a number in hexadecimal (base 16) uppercase format.
-		ft_putstr_fd(d, 1);
-		count = ft_strlen(d);
-	}
+	if (*str == 'x' || *str == 'X' || *str == 'p')
+		count = ft_hex(va_arg(ap, int), *str);// Prints a number in hexadecimal (base 16) format.
 	if (*str == '%')
 	{
 		write(1, "%", 1);// Prints a percent sign.
@@ -118,8 +113,7 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%') // if % is found, check which parameter
 		{
 			i++;
-			params(&str[i], ap);
-			//value = value + params(*ap, int);
+			value = value + params(&str[i], ap);
 			i++;
 		}
 		ft_putchar_fd(str[i], 1);
