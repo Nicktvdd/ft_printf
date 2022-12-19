@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/19 15:56:15 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:03:14 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ int	params(const char *str, va_list ap)
 	}	
 	if (*str == 's')
 	{
-		char *str = va_arg(ap, char*);
-		ft_putstr_fd(str, 1);// Prints a string (as defined by the common C convention).
+		ft_putstr_fd(va_arg(ap, char*), 1);// Prints a string (as defined by the common C convention).
 		count = ft_strlen(str);
 	}
 	if (*str == 'd' || *str == 'i')
@@ -90,10 +89,7 @@ int	params(const char *str, va_list ap)
 	if (*str == 'x' || *str == 'X' || *str == 'p')
 		count = ft_hex(va_arg(ap, int), *str);// Prints a number in hexadecimal (base 16) format.
 	if (*str == '%')
-	{
-		write(1, "%", 1);// Prints a percent sign.
-		count = 1;
-	}
+		count = write(1, "%", 1);// Prints a percent sign.
 	return (count);
 }
 
