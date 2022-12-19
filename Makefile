@@ -1,7 +1,7 @@
 NAME = libftprintf.a
 CC = cc -c
 CFLAGS = -Wall -Werror -Wextra
-LDFLAGS = libft.h ft_printf.h
+LDFLAGS = ft_printf.h
 SRCFILES = ft_printf.c
 OBJFILES = $(SRCFILES:%.c=%.o)
 
