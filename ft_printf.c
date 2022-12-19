@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/19 16:03:14 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:29:51 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_counter(long n)
 		len++;
 	}
 	len++;
-	return (len);
+	return (len - 2);
 }
 
 int	ft_hex(int deci, char flag)
@@ -38,7 +38,7 @@ int	ft_hex(int deci, char flag)
 	len = ft_counter(deci);
 	if (flag == 'p')
 		ft_putstr_fd("0x", 1);
-	(hexa = malloc(sizeof(char) * (len + 1)));
+	hexa = malloc(sizeof(char) * (len + 1));
 	if (!hexa)
 		return (0);
 	while (deci != 0)
@@ -55,7 +55,7 @@ int	ft_hex(int deci, char flag)
 	ft_putstr_fd(hexa, 1);
 	if (flag == 'p')
 		len += 2;
-return (len);
+return (len + 1);
 }
 
 // take the argument from '%'
@@ -70,8 +70,9 @@ int	params(const char *str, va_list ap)
 	}	
 	if (*str == 's')
 	{
-		ft_putstr_fd(va_arg(ap, char*), 1);// Prints a string (as defined by the common C convention).
-		count = ft_strlen(str);
+		char *s = va_arg(ap, char*);
+		ft_putstr_fd(s, 1);// Prints a string (as defined by the common C convention).
+		count = ft_strlen(s);
 	}
 	if (*str == 'd' || *str == 'i')
 	{
