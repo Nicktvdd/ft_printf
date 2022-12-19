@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/19 13:29:41 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:35:00 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_hex(int deci)
 	int remainder;
 	int i;
 	char *hexa;
-
+	
 	while (deci != 0)
 	{
 		remainder = deci % 16;
