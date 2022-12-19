@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/19 13:52:27 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:57:46 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_hex(int deci)
 		if (remainder < 10)
 			hexa[i++] = 48 + remainder;
 		else
-			hexa[i++] = 55 + remainder;
+			hexa[i++] = 87 + remainder;
 		deci = deci / 16;
 	}
 return (hexa);
