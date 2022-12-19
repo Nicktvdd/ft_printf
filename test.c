@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:59 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/13 10:20:35 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:59:51 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	main(void)
 	ft_printf("str is :%s:\n", "stringboi");
 	printf("str is :%s:\n", "stringboi");
 
-
+	printf("x is :%x:\n", 10);
+	printf("x is :%x:\n", 10);
 	//ft_printf("string :%c: :%s: :%p: :%d: :%i: mid-string :%u: :%x: :%x: :%X: :%%: end-string\n");
 	//printf("string :%c: :%s: :%p: :%d: :%i: mid-string :%u: :%x: :%x: :%X: :%%: end-string\n");
 

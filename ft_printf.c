@@ -6,12 +6,30 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/13 14:38:23 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:29:41 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+
+char	*ft_hex(int deci)
+{
+	int remainder;
+	int i;
+	char *hexa;
+
+	while (deci != 0)
+	{
+		remainder = deci % 16;
+		if (remainder < 10)
+			hexa[i++] = 48 + remainder;
+		else
+			hexa[i++] = 55 + remainder;
+		deci = deci / 16;
+	}
+return (hexa);
+}
 
 // take the argument from '%'
 int	params(const char *str, va_list ap) 
@@ -27,7 +45,7 @@ int	params(const char *str, va_list ap)
 	{
 		char *str = va_arg(ap, char*);
 		ft_putstr_fd(str, 1);// Prints a string (as defined by the common C convention).
-		ft_strlen(str);
+		count = ft_strlen(str);
 	}
 	/*if (ap == 'p')
 		ft_void(str);// The void * pointer argument has to be printed in hexadecimal format. */
@@ -44,10 +62,19 @@ int	params(const char *str, va_list ap)
 		ft_putstr_fd(d, 1);
 		count = ft_strlen(d);
 	}
-/* 	if (ap == 'x')
-		ft_lowhex(str);// Prints a number in hexadecimal (base 16) lowercase format.
-	if (ap == 'X')
-		ft_uphex(str);// Prints a number in hexadecimal (base 16) uppercase format. */
+	if (*str == 'x')
+	{
+		char *d = ft_hex(va_arg(ap, int));// Prints a number in hexadecimal (base 16) lowercase format.
+		ft_putstr_fd(d, 1);
+		count = ft_strlen(d);
+	}
+	if (*str == 'X')
+	{
+		char *d = ft_hex(va_arg(ap, int));// Prints a number in hexadecimal (base 16) uppercase format.
+		ft_putstr_fd(d, 1);
+		count = ft_strlen(d);
+	}
+
 	if (*str == '%')
 	{
 		write(1, "%", 1);// Prints a percent sign.
