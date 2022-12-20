@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/20 14:10:28 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:14:50 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int	params(const char *str, va_list ap)
 	{
 		char *s = va_arg(ap, char*);
 		if (s == NULL)
-			ft_putstr_fd("(null)", 1);
-		else
 		{
-			ft_putstr_fd(s, 1);// Prints a string (as defined by the common C convention).
-
+			ft_putstr_fd("(null)", 1);
+			count = 6;
 		}
-					count = ft_strlen(s);
+		else
+			ft_putstr_fd(s, 1);// Prints a string (as defined by the common C convention).
+		count += ft_strlen(s);
 	}
 	if (*str == 'd' || *str == 'i')
 	{
