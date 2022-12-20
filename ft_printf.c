@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/20 14:29:13 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:45:17 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,35 @@
 return (len + 1);
 } */
 
-int ft_hex(unsigned int x, char flag) {
-  char buffer[17];
-  int i = 0;
-  if (flag)
-	flag = flag + 0;
-  while (x > 0) {
-    unsigned int digit = x % 16;
-    if (digit < 10) {
-      buffer[i] = '0' + digit;
-    } else {
-      buffer[i] = 'a' + (digit - 10);
-    }
-    x /= 16;
-    i++;
-  }
-  if (i == 0) {
-    buffer[i++] = '0';
-  }
-  buffer[i] = '\0';
-  ft_putstr_fd(buffer, 1);
-  return (ft_strlen(buffer));
+int ft_hex(unsigned int deci, char flag) 
+{
+	char hexa[17];
+	int i = 0;
+	int len;
+
+	if (flag == 'p')
+		ft_putstr_fd("0x", 1);
+	while (deci > 0) 
+	{
+		unsigned int digit = deci % 16;
+    	if (digit < 10)
+			hexa[i] = '0' + digit;
+		else if (flag == 'X')
+			hexa[i] = 'A' + (digit - 10);
+		else
+    		hexa[i] = 'a' + (digit - 10);
+
+    	deci /= 16;
+    	i++;
+  	}
+  	if (i == 0) 
+    	hexa[i++] = '0';
+  	hexa[i] = '\0';
+  	ft_putstr_fd(hexa, 1);
+	len = ft_strlen(hexa);
+	if (flag == 'p')
+		len += 2;
+  	return (len);
 } 
 
 
