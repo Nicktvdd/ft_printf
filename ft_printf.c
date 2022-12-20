@@ -6,58 +6,12 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/20 14:45:17 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:28:30 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
-
-/* static int	ft_counter(long n)
-{
-	int	len;
-
-	len = 0;
-	while (n / 10)
-	{
-		n = n / 10;
-		len++;
-	}
-	len++;
-	return (len - 2);
-} */
-
-/* int	ft_hex(unsigned int deci, char flag)
-{
-	int remainder;
-	int i;
-	int len;
-	char *hexa;
-
-	i = 0;
-	len = ft_counter(deci);
-	if (flag == 'p')
-		ft_putstr_fd("0x", 1);
-	hexa = malloc(sizeof(char) * (len + 1));
-	if (!hexa)
-		return (0);
-	while (deci != 0)
-	{
-		remainder = deci % 16;
-		if (remainder < 10)
-			hexa[i++] = 48 + remainder;
-		else if (flag == 'X')
-			hexa[i++] = 55 + remainder;
-		else
-			hexa[i++] = 87 + remainder;
-		deci = deci / 16;
-	}
-	ft_putstr_fd(hexa, 1);
-	if (flag == 'p')
-		len += 2;
-	free(hexa);
-return (len + 1);
-} */
 
 int ft_hex(unsigned int deci, char flag) 
 {
@@ -88,11 +42,11 @@ int ft_hex(unsigned int deci, char flag)
 	if (flag == 'p')
 		len += 2;
   	return (len);
-} 
+}
 
 
 // take the argument from '%'
-int	params(const char *str, va_list ap) 
+int	params(const char *str, va_list ap)
 {
 	int count;
 	count = 0;

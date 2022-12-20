@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:59 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/20 14:17:39 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:10:10 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	main(void)
 	value = printf("X is :%X:\n", 10);
 	printf("value is %i\n\n", value);
 
-	value = ft_printf("p is :%p:\n", 1);
+	value = ft_printf("p is :%p:\n", 16);
 	printf("value is %i\n", value);
-	value = printf("p is :%p:\n", 1);
+	value = printf("p is :%p:\n", 16);
 	printf("value is %i\n\n", value);
 	//ft_printf("string :%c: :%s: :%p: :%d: :%i: mid-string :%u: :%x: :%x: :%X: :%%: end-string\n");
 	//printf("string :%c: :%s: :%p: :%d: :%i: mid-string :%u: :%x: :%x: :%X: :%%: end-string\n");
