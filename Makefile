@@ -28,3 +28,8 @@ fclean: clean
 	rm -f libft/libft.a
 
 re: fclean all
+
+test:
+	make re
+	cc test.c $(NAME)
+	./a.out

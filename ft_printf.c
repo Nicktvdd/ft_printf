@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/19 16:29:51 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:34:21 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	ft_hex(int deci, char flag)
 	ft_putstr_fd(hexa, 1);
 	if (flag == 'p')
 		len += 2;
+	free(hexa);
 return (len + 1);
 }
 
@@ -79,6 +80,7 @@ int	params(const char *str, va_list ap)
 		char *n = ft_itoa(va_arg(ap, int));// Prints a decimal (base 10) number.
 		ft_putstr_fd(n, 1);
 		count = ft_strlen(n);
+		free(n);
 	}
 	if (*str == 'u')
 	{
@@ -86,6 +88,7 @@ int	params(const char *str, va_list ap)
 		char *d = ft_itoa(n);// Prints an unsigned decimal (base 10) number.
 		ft_putstr_fd(d, 1);
 		count = ft_strlen(d);
+		free(d);
 	}
 	if (*str == 'x' || *str == 'X' || *str == 'p')
 		count = ft_hex(va_arg(ap, int), *str);// Prints a number in hexadecimal (base 16) format.
@@ -105,7 +108,7 @@ int	ft_printf(const char *str, ...)
 	value = 0; // should become same return value as printf
 	va_start(ap, str);
 
-	while (str[++i]) // until the string ends
+	while (str[++i] != '\0') // until the string ends
 	{
 		if (str[i] == '%') // if % is found, check which parameter
 		{
@@ -113,8 +116,9 @@ int	ft_printf(const char *str, ...)
 			value = value + params(&str[i], ap);
 			i++;
 		}
+		else
+			value++;
 		ft_putchar_fd(str[i], 1);
-		value++;
 	}
 
 	va_end(ap);
