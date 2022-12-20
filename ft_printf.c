@@ -6,14 +6,14 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/20 14:14:50 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:29:13 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-static int	ft_counter(long n)
+/* static int	ft_counter(long n)
 {
 	int	len;
 
@@ -25,9 +25,9 @@ static int	ft_counter(long n)
 	}
 	len++;
 	return (len - 2);
-}
+} */
 
-int	ft_hex(int deci, char flag)
+/* int	ft_hex(unsigned int deci, char flag)
 {
 	int remainder;
 	int i;
@@ -57,7 +57,31 @@ int	ft_hex(int deci, char flag)
 		len += 2;
 	free(hexa);
 return (len + 1);
-}
+} */
+
+int ft_hex(unsigned int x, char flag) {
+  char buffer[17];
+  int i = 0;
+  if (flag)
+	flag = flag + 0;
+  while (x > 0) {
+    unsigned int digit = x % 16;
+    if (digit < 10) {
+      buffer[i] = '0' + digit;
+    } else {
+      buffer[i] = 'a' + (digit - 10);
+    }
+    x /= 16;
+    i++;
+  }
+  if (i == 0) {
+    buffer[i++] = '0';
+  }
+  buffer[i] = '\0';
+  ft_putstr_fd(buffer, 1);
+  return (ft_strlen(buffer));
+} 
+
 
 // take the argument from '%'
 int	params(const char *str, va_list ap) 
