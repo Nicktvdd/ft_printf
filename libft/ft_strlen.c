@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:26:53 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/11/02 15:07:10 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:10:24 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if (s == NULL)
+		return 0;
 	while (s[i])
 	{
 		i++;
