@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/21 11:32:27 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/21 11:57:01 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strrev(char *src)
 {
 	int		i;
 	int		len;
-	char	str[17];
+	char	str[16];
 
 	i = 0;
 	len = strlen(src);
@@ -33,7 +33,7 @@ int	ft_strrev(char *src)
 
 int ft_hex(unsigned int deci, char flag) 
 {
-	char hexa[17];
+	char hexa[16];
 	int i = 0;
 	int len;
 
@@ -48,7 +48,6 @@ int ft_hex(unsigned int deci, char flag)
 			hexa[i] = 'A' + (digit - 10);
 		else
     		hexa[i] = 'a' + (digit - 10);
-
     	deci /= 16;
     	i++;
   	}
