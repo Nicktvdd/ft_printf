@@ -6,12 +6,30 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/20 16:28:30 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/21 11:32:27 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+
+int	ft_strrev(char *src)
+{
+	int		i;
+	int		len;
+	char	str[17];
+
+	i = 0;
+	len = strlen(src);
+	while (len > 0)
+	{
+		str[--len] = src[i];
+		i++;
+	}
+	str[i] = '\0';
+	ft_putstr_fd(str, 1);
+	return (i);
+}
 
 int ft_hex(unsigned int deci, char flag) 
 {
@@ -37,8 +55,7 @@ int ft_hex(unsigned int deci, char flag)
   	if (i == 0) 
     	hexa[i++] = '0';
   	hexa[i] = '\0';
-  	ft_putstr_fd(hexa, 1);
-	len = ft_strlen(hexa);
+  	len = ft_strrev(hexa);
 	if (flag == 'p')
 		len += 2;
   	return (len);
