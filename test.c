@@ -6,12 +6,13 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:59 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/21 11:54:22 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:30:19 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limist.h>
 
 int	main(void)
 {
@@ -59,9 +60,9 @@ int	main(void)
 	value = printf("X is :%X:\n", 10);
 	printf("value is %i\n\n", value);
 
-	value = ft_printf("p is :%x:\n", __LONG_MAX__);
+	value = ft_printf("p is :%p:\n", __LONG_MAX__);
 	printf("value is %i\n", value);
-	value = printf("p is :%x:\n", __LONG_MAX__);
+	value = printf("p is :%p:\n", __LONG_MAX__);
 	printf("value is %i\n\n", value);
 	//ft_printf("string :%c: :%s: :%p: :%d: :%i: mid-string :%u: :%x: :%x: :%X: :%%: end-string\n");
 	//printf("string :%c: :%s: :%p: :%d: :%i: mid-string :%u: :%x: :%x: :%X: :%%: end-string\n");
