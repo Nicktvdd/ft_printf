@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/21 14:49:50 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/21 15:38:40 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	sort(const char *str, va_list ap)
 	return (count);
 }
 
-int	ft_strrev(char *src)
+int	ft_strrev(char *src, char flag)
 {
 	int		i;
 	int		len;
@@ -55,6 +55,8 @@ int	ft_strrev(char *src)
 		i++;
 	}
 	str[i] = '\0';
+	if (flag == 'p')
+		ft_putstr_fd("0x", 1);
 	ft_putstr_fd(str, 1);
 	return (i);
 }
@@ -67,8 +69,6 @@ int	ft_hex(unsigned long long deci, char flag)
 	unsigned int	digit;
 
 	i = 0;
-	if (flag == 'p')
-		ft_putstr_fd("0x", 1);
 	while (deci > 0)
 	{
 		digit = deci % 16;
@@ -83,7 +83,7 @@ int	ft_hex(unsigned long long deci, char flag)
 	if (i == 0)
 		hexa[i++] = '0';
 	hexa[i] = '\0';
-	len = ft_strrev(hexa);
+	len = ft_strrev(hexa, flag);
 	if (flag == 'p')
 		len += 2;
 	return (len);
