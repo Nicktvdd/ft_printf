@@ -6,12 +6,40 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/21 13:37:34 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:28:33 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+
+int	sort(const char *str, va_list ap)
+{
+	char	*s;
+	int		count;
+	
+	count = 0;
+	if (*str == 's')
+	{
+		s = va_arg(ap, char*);
+		if (s == NULL)
+			count = write(1, "(null)", 6);
+		else
+			ft_putstr_fd(s, 1);
+		count += ft_strlen(s);
+	}
+	else if (*str == 'd' || *str == 'i' || *str == 'u')
+	{
+		if (*str == 'u')
+			s = ft_itoa((unsigned int)va_arg(ap, unsigned int));
+		else
+			s = ft_itoa(va_arg(ap, int));
+		ft_putstr_fd(s, 1);
+		count = ft_strlen(s);
+		free(s);
+	}
+	return (count);
+}
 
 int	ft_strrev(char *src)
 {
@@ -65,43 +93,22 @@ int ft_hex(unsigned long long deci, char flag)
 int	params(const char *str, va_list ap)
 {
 	int count;
+	
 	count = 0;
 	if (*str == 'c')
-	{
-		ft_putchar_fd(va_arg(ap, int), 1);//Prints a single character.
+		ft_putchar_fd(va_arg(ap, int), 1);
+	if (*str == 'c')
 		count = 1;
-	}	
 	if (*str == 's')
-	{
-		char *s = va_arg(ap, char*);
-		if (s == NULL)
-		{
-			ft_putstr_fd("(null)", 1);
-			count = 6;
-		}
-		else
-			ft_putstr_fd(s, 1);// Prints a string (as defined by the common C convention).
-		count += ft_strlen(s);
-	}
-	if (*str == 'd' || *str == 'i')
-	{
-		char *n = ft_itoa(va_arg(ap, int));// Prints a decimal (base 10) number.
-		ft_putstr_fd(n, 1);
-		count = ft_strlen(n);
-		free(n);
-	}
-	if (*str == 'u')
-	{
-		long n = (unsigned int)va_arg(ap, unsigned int);
-		char *d = ft_itoa(n);// Prints an unsigned decimal (base 10) number.
-		ft_putstr_fd(d, 1);
-		count = ft_strlen(d);
-		free(d);
-	}
-	if (*str == 'x' || *str == 'X' || *str == 'p')
-		count = ft_hex(va_arg(ap, unsigned long long), *str);// Prints a number in hexadecimal (base 16) format.
+		count = sort(str, ap);
+	if (*str == 'd' || *str == 'i' || *str == 'u')
+		count = sort(str, ap);
+	if (*str == 'x' || *str == 'X')
+		count = ft_hex(va_arg(ap, unsigned int), *str);
+	if (*str == 'p')
+		count = ft_hex(va_arg(ap, unsigned long long), *str);
 	if (*str == '%')
-		count = write(1, "%", 1);// Prints a percent sign.
+		count = write(1, "%", 1);
 	return (count);
 }
 
@@ -113,12 +120,11 @@ int	ft_printf(const char *str, ...)
 	static int	value;
 
 	i = 0;
-	value = 0; // should become same return value as printf
+	value = 0;
 	va_start(ap, str);
-
-	while (str[i] != '\0') // until the string ends
+	while (str[i] != '\0')
 	{
-		if (str[i] == '%') // if % is found, check which parameter
+		if (str[i] == '%')
 		{
 			i++;
 			value = value + params(&str[i], ap);
@@ -131,8 +137,6 @@ int	ft_printf(const char *str, ...)
 			i++;
 		}
 	}
-
 	va_end(ap);
-
-	return(value);
+	return (value);
 }

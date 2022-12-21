@@ -6,13 +6,12 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:35:59 by nvan-den          #+#    #+#             */
-/*   Updated: 2022/12/21 13:30:19 by nvan-den         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:58:56 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
-#include <limist.h>
 
 int	main(void)
 {
@@ -45,9 +44,9 @@ int	main(void)
 	value = printf("u is :%u:\n", -1);
 	printf("value is %i\n\n", value);
 
-	value = ft_printf("str is :%s:\n", "stringboi");
+	value = ft_printf(" NULL %s NULL ", NULL);
 	printf("value is %i\n", value);
-	value = printf("str is :%s:\n", "stringboi");
+	value = printf(" NULL %s NULL ", NULL);
 	printf("value is %i\n\n", value);
 
 	value = ft_printf("x is :%x:\n", 10);
