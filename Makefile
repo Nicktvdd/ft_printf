@@ -17,7 +17,7 @@ $(NAME): $(OBJFILES)
 $(OBJFILES): $(SRCFILES)
 	$(CC) $(CFLAGS) $(SRCFILES) -I $(LDFLAGS)
 
-.PHONY: clean
+.PHONY: clean test
 
 clean:
 	rm -rf $(OBJFILES)
