@@ -6,12 +6,13 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/01/11 12:03:34 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:15:22 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+// deals with the s, u, d and i parameters
 int	sudi_params(const char *str, va_list ap)
 {
 	char	*string;
@@ -40,6 +41,7 @@ int	sudi_params(const char *str, va_list ap)
 	return (count);
 }
 
+// reverts the hexadecimal and prints it
 int	ft_strrev(char *src, char flag)
 {
 	int		i;
@@ -60,6 +62,7 @@ int	ft_strrev(char *src, char flag)
 	return (i);
 }
 
+// converts decimal to hexadecimal
 int	ft_hex(unsigned long long deci, char flag)
 {
 	char			hexa[17];
