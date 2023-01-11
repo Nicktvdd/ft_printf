@@ -6,7 +6,7 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/01/10 12:53:17 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:45:43 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	ft_printf(const char *str, ...)
 {
 	int			i;
 	va_list		ap;
-	static int	value;
+	int			value;
 
 	i = 0;
 	value = 0;
