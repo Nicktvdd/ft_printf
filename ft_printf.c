@@ -6,36 +6,36 @@
 /*   By: nvan-den <nvan-den@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:34:30 by nvan-den          #+#    #+#             */
-/*   Updated: 2023/01/11 11:45:43 by nvan-den         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:03:34 by nvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	sort(const char *str, va_list ap)
+int	sudi_params(const char *str, va_list ap)
 {
-	char	*s;
+	char	*string;
 	int		count;
 
 	count = 0;
 	if (*str == 's')
 	{
-		s = va_arg(ap, char *);
-		if (s == NULL)
+		string = va_arg(ap, char *);
+		if (string == NULL)
 			count = write(1, "(null)", 6);
 		else
-			ft_putstr_fd(s, 1);
-		count += ft_strlen(s);
+			ft_putstr_fd(string, 1);
+		count += ft_strlen(string);
 	}
 	else if (*str == 'd' || *str == 'i' || *str == 'u')
 	{
 		if (*str == 'u')
-			s = ft_itoa((unsigned int)va_arg(ap, unsigned int));
+			string = ft_itoa((unsigned int)va_arg(ap, unsigned int));
 		else
-			s = ft_itoa(va_arg(ap, int));
-		ft_putstr_fd(s, 1);
-		count = ft_strlen(s);
-		free(s);
+			string = ft_itoa(va_arg(ap, int));
+		ft_putstr_fd(string, 1);
+		count = ft_strlen(string);
+		free(string);
 	}
 	return (count);
 }
@@ -43,14 +43,14 @@ int	sort(const char *str, va_list ap)
 int	ft_strrev(char *src, char flag)
 {
 	int		i;
-	int		len;
+	int		count;
 	char	str[17];
 
 	i = 0;
-	len = strlen(src);
-	while (len > 0)
+	count = strlen(src);
+	while (count > 0)
 	{
-		str[--len] = src[i];
+		str[--count] = src[i];
 		i++;
 	}
 	str[i] = '\0';
@@ -64,7 +64,7 @@ int	ft_hex(unsigned long long deci, char flag)
 {
 	char			hexa[17];
 	int				i;
-	int				len;
+	int				count;
 	unsigned int	digit;
 
 	i = 0;
@@ -82,10 +82,10 @@ int	ft_hex(unsigned long long deci, char flag)
 	if (i == 0)
 		hexa[i++] = '0';
 	hexa[i] = '\0';
-	len = ft_strrev(hexa, flag);
+	count = ft_strrev(hexa, flag);
 	if (flag == 'p')
-		len += 2;
-	return (len);
+		count += 2;
+	return (count);
 }
 
 // take the argument from '%'
@@ -99,9 +99,9 @@ int	params(const char *str, va_list ap)
 	if (*str == 'c')
 		count = 1;
 	if (*str == 's')
-		count = sort(str, ap);
+		count = sudi_params(str, ap);
 	if (*str == 'd' || *str == 'i' || *str == 'u')
-		count = sort(str, ap);
+		count = sudi_params(str, ap);
 	if (*str == 'x' || *str == 'X')
 		count = ft_hex(va_arg(ap, unsigned int), *str);
 	if (*str == 'p')
@@ -116,26 +116,26 @@ int	ft_printf(const char *str, ...)
 {
 	int			i;
 	va_list		ap;
-	int			value;
+	int			count;
 
 	i = 0;
-	value = 0;
+	count = 0;
 	va_start(ap, str);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
 		{
 			i++;
-			value = value + params(&str[i], ap);
+			count = count + params(&str[i], ap);
 			i++;
 		}
 		else
 		{
-			value++;
+			count++;
 			ft_putchar_fd(str[i], 1);
 			i++;
 		}
 	}
 	va_end(ap);
-	return (value);
+	return (count);
 }
